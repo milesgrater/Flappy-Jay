@@ -1,0 +1,15 @@
+<RootScreen>:
+    StartScreen:
+
+<StartScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "flappy-jay-background.jpg"
+
+        Ellipse:
+            pos: 0, self.center_y
+            size: [150, 150]
+            source: "flappy-jay-bird.png"
+
