@@ -8,36 +8,41 @@ from kivy.clock import Clock
 
 class Background(Widget):
     cloud_texture = ObjectProperty(None)
+    floor_texture = ObjectProperty(None)
     
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         # Gets texture version of cloud image
         self.cloud_texture = Image(source = 'cloud.png').texture
+        self.floor_texture = Image(source = 'flappyBirdFloor.png').texture
 
         # Allows clouds to repeat through out the sky
         self.cloud_texture.wrap = 'repeat'
+        self.floor_texture.wrap = 'repeat'
 
         # Determines how big the cloud size is before being repeated
         self.cloud_texture.uvsize = (Window.width / self.cloud_texture.width, -1)
+        self.floor_texture.uvsize = (Window.width / self.floor_texture.width, -1)
 
-    def scroll_textures(self, elasped_time):
+    def scroll_effect(self, elapsed_time):
         # Updates the position of the cloud, and the modulo so it can be wrapped
-        self.cloud_texture.uvpos = ( (self.cloud_texture.uvpos[0] + elasped_time) % Window.width ,self.cloud_texture.uvpos[1])
+        self.cloud_texture.uvpos = ( (self.cloud_texture.uvpos[0] + elapsed_time) % Window.width, self.cloud_texture.uvpos[1])
+        self.floor_texture.uvpos = ( (self.floor_texture.uvpos[0] + elapsed_time / 2.0) % Window.width, self.floor_texture.uvpos[1])
 
-        # Draws the texture over again
+        # Draws the texture over and over
         texture = self.property('cloud_texture')
         texture.dispatch(self)
 
-    pass
+        texture = self.property('floor_texture')
+        texture.dispatch(self)
 
 
 class FlappyApp(App):
     def on_start(self):
         # Acts as a frame rate 
-        Clock.schedule_interval(self.root.ids.background.scroll_textures, 1/60.)
-        
-    pass
+        Clock.schedule_interval(self.root.ids.background.scroll_effect, 1/60.)
 
-    
+
+
 FlappyApp().run()
