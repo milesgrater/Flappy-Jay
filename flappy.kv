@@ -1,15 +1,17 @@
-<RootScreen>:
-    StartScreen:
+FloatLayout:
+    Background:
+        id: background
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "flappy-jay-background.png"
 
-<StartScreen>:
-    canvas.before:
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: "flappy-jay-background.jpg"
+            Rectangle:
+                size: self.width, 138
+                pos: self.pos[0], self.pos[1] + self.height - 138
+                texture: self.cloud_texture
+        
 
-        Ellipse:
-            pos: 0, self.center_y
-            size: [150, 150]
-            source: "flappy-jay-bird.png"
+
 
