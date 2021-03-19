@@ -1,3 +1,5 @@
+#:include pipes.kv
+
 FloatLayout:
     Background:
         id: background
@@ -17,7 +19,14 @@ FloatLayout:
                 id: floor
                 size: self.width, 112
                 pos: self.pos[0], self.pos[1]
-                texture: self.floor_texture        
+                texture: self.floor_texture      
+
+    Pipe:
+        size_hint: None, None
+        size: 64, root.height - 112
+        pos: 200, 112
+        pipe_center: 250
+                    
 
 
 

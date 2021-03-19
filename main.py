@@ -5,6 +5,8 @@ from kivy.uix.image import Image
 from kivy.core.window import Window
 from kivy.clock import Clock
 
+from pipes import Pipe
+
 
 class Background(Widget):
     cloud_texture = ObjectProperty(None)
@@ -15,7 +17,7 @@ class Background(Widget):
 
         # Gets texture version of cloud image
         self.cloud_texture = Image(source = 'cloud.png').texture
-        self.floor_texture = Image(source = 'flappyBirdFloor.png').texture
+        self.floor_texture = Image(source = 'flappyJayFloor.png').texture
 
         # Allows clouds to repeat through out the sky
         self.cloud_texture.wrap = 'repeat'
