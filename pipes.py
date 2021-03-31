@@ -3,6 +3,8 @@ from kivy.properties import NumericProperty
 from kivy.properties import ObjectProperty
 from kivy.properties import ListProperty
 from kivy.uix.image import Image
+from kivy.clock import Clock
+import numpy as np
 
 class Pipe(Widget):
     pipe_gap = NumericProperty(60)
@@ -22,6 +24,8 @@ class Pipe(Widget):
     btm_pipe_coords = ListProperty( (0, 0, 1, 0, 1, 1, 0, 1) )
     top_pipe_coords = ListProperty( (0, 0, 1, 0, 1, 1, 0, 1) )
 
+    floor_height = NumericProperty(112)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -38,3 +42,6 @@ class Pipe(Widget):
         top_half_body = self.top - self.top_body_pos
         self.top_pipe_coords[5] = top_half_body/20.0
         self.top_pipe_coords[7] = top_half_body/20.0
+
+    def on_pipe_center(self, *args):
+        Clock.schedule_once(self.on_size, 0)
