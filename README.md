@@ -9,3 +9,8 @@
         pip install kivy.deps.gstreamer
         pip install kivy.deps.angle
         pip install kivy
+
+## Installing MySQL Connector
+    In order to use the database connection code the MySQL Connector is used to remotely connect to the FlappyJay leaderboard database.
+    Below is the list of commands to run in order to install the MySQL Connector.
+        pip install mysql-connector-python
