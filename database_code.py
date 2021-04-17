@@ -85,6 +85,8 @@ usr = 'wolfea'
 pwd = 'wolfea'
 h = '172.16.86.208'
 db = 'FlappyJay'
+<<<<<<< HEAD
+
 connection = connectDB(usr, pwd, h, db)
 
 #creates cursor 
