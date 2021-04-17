@@ -99,23 +99,23 @@ cursor = connection.cursor()
 #eventually change this score to get score from game environment directly
 #*************************************************************************
 #score = 150
-=======
-# #*************************************************************************
-# #eventually change this score to get score from game environment directly
-# #*************************************************************************
-# score = 75
 
-# #add user and score to leaderboard
+#*************************************************************************
+#eventually change this score to get score from game environment directly
+#*************************************************************************
+#score = 75
+
+# add user and score to leaderboard
 # addScore(username, score)
 
-# #can use to reset leaderboard
+# can use to reset leaderboard
 # #clearLeaderboard()
 
 #close cursor and database connection
 # cursor.close()
 # connection.close()
-=======
-# #close cursor and database connection
+
+# close cursor and database connection
 #cursor.close()
 #connection.close()
 
