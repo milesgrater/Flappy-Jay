@@ -74,7 +74,6 @@ def connectDB(username, passwd, h, db):
 
 
 #creates connection to database for Flappy Jay (replace user, password, host, and database once finalized server is up and running)
-<<<<<<< HEAD
 #usr = 'flappy_jay'
 #pwd = 'software'
 #h = '127.0.0.1'
@@ -82,16 +81,12 @@ def connectDB(username, passwd, h, db):
 #connection = connectDB(usr, pwd, h, db)
 
 #connects to school server
-=======
->>>>>>> 2d8e20573fcc5bf8f074d2ed5ae89d1076c97caf
 usr = 'wolfea'
 pwd = 'wolfea'
 h = '172.16.86.208'
 db = 'FlappyJay'
 <<<<<<< HEAD
 
-=======
->>>>>>> 2d8e20573fcc5bf8f074d2ed5ae89d1076c97caf
 connection = connectDB(usr, pwd, h, db)
 
 #creates cursor 
