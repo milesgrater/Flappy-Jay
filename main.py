@@ -6,10 +6,11 @@ from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.properties import NumericProperty
 from random import randint
+from kivy.uix.textinput import TextInput
+from kivy.uix.label import Label
 
 from pipes import Pipe
-
-
+import database_code
 
 class Background(Widget):
     cloud_texture = ObjectProperty(None)
@@ -72,7 +73,7 @@ class FlappyApp(App):
     amount_pipes = []
     jay_gravity = 300
     was_colliding = False
-    
+
     def flap_wings(self, elapsed_time):
         jay = self.root.ids.jay
         jay.y = jay.y + jay.jay_velocity * elapsed_time
@@ -100,12 +101,14 @@ class FlappyApp(App):
         self.was_colliding = is_colliding
 
     def game_over(self):
+        database_code.addScore(username="Alabama", user_score=int(self.root.ids.player_score.text))
         self.root.ids.jay.pos = (20, (self.root.height - 112) / 2.0)
         for pipe in self.amount_pipes:
             self.root.remove_widget(pipe)
         self.frames.cancel()
         self.root.ids.startbutton.disabled = False
         self.root.ids.startbutton.opacity = 1
+
 
 
     def next_frame(self, elapsed_time):
@@ -115,6 +118,7 @@ class FlappyApp(App):
 
     
     def start_game(self):
+
         self.root.ids.player_score.text = "0"
         self.was_colliding = False
         self.amount_pipes = []
@@ -149,4 +153,8 @@ class FlappyApp(App):
 
 
 if __name__ == '__main__':
+    connection = database_code.connectDB(username='wolfea', passwd='wolfea', h='172.16.86.208', db='FlappyJay')
+    cursor = connection.cursor()
     FlappyApp().run()
+    cursor.close()
+    connection.close()
