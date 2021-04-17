@@ -74,10 +74,10 @@ def connectDB(username, passwd, h, db):
 
 
 #creates connection to database for Flappy Jay (replace user, password, host, and database once finalized server is up and running)
-usr = 'flappy_jay'
-pwd = 'software'
-h = '127.0.0.1'
-db = 'flappy_jay'
+usr = 'wolfea'
+pwd = 'wolfea'
+h = '172.16.86.208'
+db = 'FlappyJay'
 connection = connectDB(usr, pwd, h, db)
 
 #creates cursor 
