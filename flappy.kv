@@ -20,11 +20,28 @@ FloatLayout:
                 size: self.width, 112
                 pos: self.pos[0], self.pos[1]
                 texture: self.floor_texture
+
+    Label:
+        id: player_score
+        size_hint_y: None
+        height: 112
+        text: "0"
+        font_size: 40
+
     Button:
         text: "Start Game!"
         size_hint: None, None
+        id: startbutton
         on_release:
             app.start_game()
+            self.disabled = True
+            self.opacity = 0
+    Jay:
+        source: "flappy-jay-bird.png"
+        size_hint: None, None
+        size: 40, 42
+        pos: 20, (root.height - 112) / 2.0
+        id: jay
 
 
 

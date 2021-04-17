@@ -7,7 +7,7 @@ from kivy.clock import Clock
 import numpy as np
 
 class Pipe(Widget):
-    pipe_gap = NumericProperty(60)
+    pipe_gap = NumericProperty(200)
 
     pipe_cap = NumericProperty(20)
     pipe_cap_width = NumericProperty(64)
@@ -23,8 +23,6 @@ class Pipe(Widget):
     pipe_body_texture = ObjectProperty(None)
     btm_pipe_coords = ListProperty( (0, 0, 1, 0, 1, 1, 0, 1) )
     top_pipe_coords = ListProperty( (0, 0, 1, 0, 1, 1, 0, 1) )
-
-    floor_height = NumericProperty(112)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
