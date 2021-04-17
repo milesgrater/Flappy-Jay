@@ -101,7 +101,9 @@ class FlappyApp(App):
         self.was_colliding = is_colliding
 
     def game_over(self):
-        database_code.addScore(username="Alabama", user_score=int(self.root.ids.player_score.text))
+        player_score = self.root.ids.player_score.text
+        username = 'Alabama'
+        database_code.addScore(username, player_score)
         self.root.ids.jay.pos = (20, (self.root.height - 112) / 2.0)
         for pipe in self.amount_pipes:
             self.root.remove_widget(pipe)
@@ -118,7 +120,6 @@ class FlappyApp(App):
 
     
     def start_game(self):
-
         self.root.ids.player_score.text = "0"
         self.was_colliding = False
         self.amount_pipes = []
@@ -153,8 +154,6 @@ class FlappyApp(App):
 
 
 if __name__ == '__main__':
-    connection = database_code.connectDB(username='wolfea', passwd='wolfea', h='172.16.86.208', db='FlappyJay')
-    cursor = connection.cursor()
     FlappyApp().run()
     cursor.close()
     connection.close()

@@ -14,6 +14,8 @@ def addScore(username, user_score):
     """
     Adds user and game score to leaderboard. Usernames cannot be repeated
     """
+    print(user_score)
+    print(username)
     #write sql statement to insert into leaderboard table
     add_score = ("INSERT INTO leaderboard "
                "(username, score) "
@@ -75,30 +77,14 @@ def connectDB(username, passwd, h, db):
 
 
 #creates connection to database for Flappy Jay (replace user, password, host, and database once finalized server is up and running)
-<<<<<<< HEAD
-#usr = 'wolfea'
-#pwd = 'wolfea'
-#h = '172.16.86.208'
-#db = 'FlappyJay'
-#connection = connectDB(usr, pwd, h, db)
-=======
-#usr = 'flappy_jay'
-#pwd = 'software'
-#h = '127.0.0.1'
-#db = 'flappy_jay'
-#connection = connectDB(usr, pwd, h, db)
-
-#connects to school server
 usr = 'wolfea'
 pwd = 'wolfea'
 h = '172.16.86.208'
 db = 'FlappyJay'
-
 connection = connectDB(usr, pwd, h, db)
->>>>>>> c754c0a0d5cd02118e34e54bd158304de26a2c2f
 
 #creates cursor 
-#cursor = connection.cursor()
+cursor = connection.cursor()
 
 #prompt user to enter player name after finishing game
 #username = input("Enter player name: ")
@@ -106,11 +92,7 @@ connection = connectDB(usr, pwd, h, db)
 #*************************************************************************
 #eventually change this score to get score from game environment directly
 #*************************************************************************
-<<<<<<< HEAD
 #score = 150
-=======
-score = 75
->>>>>>> c754c0a0d5cd02118e34e54bd158304de26a2c2f
 
 #add user and score to leaderboard
 #addScore(username, score)
@@ -120,5 +102,5 @@ score = 75
 
 
 #close cursor and database connection
-#cursor.close()
-#connection.close()
+# cursor.close()
+# connection.close()
