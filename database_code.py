@@ -91,21 +91,21 @@ connection = connectDB(usr, pwd, h, db)
 #creates cursor 
 cursor = connection.cursor()
 
-#prompt user to enter player name after finishing game
-username = input("Enter player name: ")
+# #prompt user to enter player name after finishing game
+# username = input("Enter player name: ")
 
-#*************************************************************************
-#eventually change this score to get score from game environment directly
-#*************************************************************************
-score = 75
+# #*************************************************************************
+# #eventually change this score to get score from game environment directly
+# #*************************************************************************
+# score = 75
 
-#add user and score to leaderboard
-addScore(username, score)
+# #add user and score to leaderboard
+# addScore(username, score)
 
-#can use to reset leaderboard
-#clearLeaderboard()
+# #can use to reset leaderboard
+# #clearLeaderboard()
 
 
-#close cursor and database connection
-cursor.close()
-connection.close()
+# #close cursor and database connection
+#cursor.close()
+#connection.close()
