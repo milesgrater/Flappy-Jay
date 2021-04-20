@@ -102,7 +102,7 @@ class FlappyApp(App):
 
     def game_over(self):
         player_score = self.root.ids.player_score.text
-        username = 'Alabama'
+        username = 'Pennsylvania'
         database_code.addScore(username, player_score)
         self.root.ids.jay.pos = (20, (self.root.height - 112) / 2.0)
         for pipe in self.amount_pipes:
