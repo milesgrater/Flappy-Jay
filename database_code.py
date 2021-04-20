@@ -76,6 +76,16 @@ def connectDB(username, passwd, h, db):
 
 
 #creates connection to database for Flappy Jay (replace user, password, host, and database once finalized server is up and running)
+<<<<<<< HEAD
+=======
+#usr = 'flappy_jay'
+#pwd = 'software'
+#h = '127.0.0.1'
+#db = 'flappy_jay'
+#connection = connectDB(usr, pwd, h, db)
+
+#connects to school server
+>>>>>>> 827694c3f42c77b49bb42dc4bfc034115d161e5a
 usr = 'wolfea'
 pwd = 'wolfea'
 h = '172.16.86.208'
@@ -93,13 +103,33 @@ cursor = connection.cursor()
 #*************************************************************************
 #score = 150
 
+<<<<<<< HEAD
 # #add user and score to leaderboard
+=======
+#*************************************************************************
+#eventually change this score to get score from game environment directly
+#*************************************************************************
+#score = 75
+
+# add user and score to leaderboard
+>>>>>>> 827694c3f42c77b49bb42dc4bfc034115d161e5a
 # addScore(username, score)
 
-# #can use to reset leaderboard
+# can use to reset leaderboard
 # #clearLeaderboard()
 
+<<<<<<< HEAD
 
 #close cursor and database connection
 # cursor.close()
 # connection.close()
+=======
+#close cursor and database connection
+# cursor.close()
+# connection.close()
+
+# close cursor and database connection
+#cursor.close()
+#connection.close()
+
+>>>>>>> 827694c3f42c77b49bb42dc4bfc034115d161e5a
