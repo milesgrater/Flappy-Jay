@@ -68,6 +68,20 @@ def updateScore(username, user_score):
     except:
         print("\nError: user score not updated!\n")
 
+def getUsernameScore_Sort():
+    cursor.execute("SELECT * FROM leaderboard")
+    leaderboard_results = cursor.fetchall()
+
+    lb_length = len(leaderboard_results)
+    for i in range(0, lb_length):
+        for j in range(0, lb_length-i-1):
+            if (leaderboard_results[j][1] < leaderboard_results[j + 1][1]): 
+                temp = leaderboard_results[j] 
+                leaderboard_results[j] = leaderboard_results[j + 1] 
+                leaderboard_results[j + 1] = temp 
+
+    return leaderboard_results 
+
 def connectDB(username, passwd, h, db):
     """
     Connects game client to the database for leaderboard access
@@ -76,8 +90,6 @@ def connectDB(username, passwd, h, db):
 
 
 #creates connection to database for Flappy Jay (replace user, password, host, and database once finalized server is up and running)
-<<<<<<< HEAD
-=======
 #usr = 'flappy_jay'
 #pwd = 'software'
 #h = '127.0.0.1'
@@ -85,7 +97,6 @@ def connectDB(username, passwd, h, db):
 #connection = connectDB(usr, pwd, h, db)
 
 #connects to school server
->>>>>>> 827694c3f42c77b49bb42dc4bfc034115d161e5a
 usr = 'wolfea'
 pwd = 'wolfea'
 h = '172.16.86.208'
@@ -103,27 +114,17 @@ cursor = connection.cursor()
 #*************************************************************************
 #score = 150
 
-<<<<<<< HEAD
-# #add user and score to leaderboard
-=======
 #*************************************************************************
 #eventually change this score to get score from game environment directly
 #*************************************************************************
 #score = 75
 
 # add user and score to leaderboard
->>>>>>> 827694c3f42c77b49bb42dc4bfc034115d161e5a
 # addScore(username, score)
 
 # can use to reset leaderboard
 # #clearLeaderboard()
 
-<<<<<<< HEAD
-
-#close cursor and database connection
-# cursor.close()
-# connection.close()
-=======
 #close cursor and database connection
 # cursor.close()
 # connection.close()
@@ -132,4 +133,3 @@ cursor = connection.cursor()
 #cursor.close()
 #connection.close()
 
->>>>>>> 827694c3f42c77b49bb42dc4bfc034115d161e5a

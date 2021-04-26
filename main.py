@@ -8,9 +8,13 @@ from kivy.properties import NumericProperty
 from random import randint
 from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.popup import Popup
+from kivy.uix.button import Button
 
 from pipes import Pipe
 import database_code
+
 
 class Background(Widget):
     cloud_texture = ObjectProperty(None)
@@ -74,6 +78,25 @@ class FlappyApp(App):
     jay_gravity = 300
     was_colliding = False
 
+    def show_leaderboard(self):
+        lb_grid = GridLayout(cols = 2)
+        lb_results = database_code.getUsernameScore_Sort()
+        res = [ [ i for i, j in lb_results ], [ j for i, j in lb_results ] ]
+        lb_username = res[0]
+        lb_score = res[1]
+
+        for x in range(10):
+            lb_grid.add_widget(Label(text = str(lb_username[x])))
+            lb_grid.add_widget(Label(text = str(lb_score[x])))
+
+        lb_popup = Popup(title = 'Leaderboard',
+                         content = lb_grid,
+                         size_hint = (None, None),
+                         size = (400, 400)
+                        )
+
+        lb_popup.open()
+
     def flap_wings(self, elapsed_time):
         jay = self.root.ids.jay
         jay.y = jay.y + jay.jay_velocity * elapsed_time
@@ -102,14 +125,18 @@ class FlappyApp(App):
 
     def game_over(self):
         player_score = self.root.ids.player_score.text
-        username = 'Pennsylvania'
+        username = 'Elbow'
         database_code.addScore(username, player_score)
+
         self.root.ids.jay.pos = (20, (self.root.height - 112) / 2.0)
         for pipe in self.amount_pipes:
             self.root.remove_widget(pipe)
+
         self.frames.cancel()
         self.root.ids.startbutton.disabled = False
         self.root.ids.startbutton.opacity = 1
+        self.root.ids.leaderboardbutton.disabled = False
+        self.root.ids.leaderboardbutton.opacity = 1
 
 
 
@@ -121,6 +148,8 @@ class FlappyApp(App):
     
     def start_game(self):
         self.root.ids.player_score.text = "0"
+        self.root.ids.leaderboardbutton.disabled = True
+        self.root.ids.leaderboardbutton.opacity = 0
         self.was_colliding = False
         self.amount_pipes = []
         self.frames = Clock.schedule_interval(self.next_frame, 1/60.)
