@@ -10,6 +10,7 @@
     `pip install kivy`
 
 * If your Python version is 3.8 or higher use this pip installation.
+
     `pip install kivy == 2.0.0rc2`
 
 ## Installing MySQL Connector
