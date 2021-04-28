@@ -14,8 +14,6 @@ def addScore(username, user_score):
     """
     Adds user and game score to leaderboard. Usernames cannot be repeated
     """
-    print(user_score)
-    print(username)
     #write sql statement to insert into leaderboard table
     add_score = ("INSERT INTO leaderboard "
                "(username, score) "

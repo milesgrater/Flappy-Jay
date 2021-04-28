@@ -18,20 +18,26 @@ FloatLayout:
             Rectangle:
                 id: floor
                 size: self.width, 112
-                pos: self.pos[0], self.pos[1]
+                pos: self.pos[0], self.pos[1] 
                 texture: self.floor_texture
+
+    Image:
+        id: title
+        source: "Flappy Jay Title Final.png"
+        size_hint: 0.7, 0.5
+        pos_hint: {"center_x" : .5, "center_y" : .5}
 
     Label:
         id: player_score
         size_hint_y: None
         height: 112
-        text: "0"
-        font_size: 40
+        text: ""
+        font_size: 40        
 
     Button:
         background_normal: "Play Button.png"
-        size_hint: None, None
         id: startbutton
+        size_hint: None, None
         on_release:
             app.start_game()
             self.disabled = True
@@ -47,7 +53,7 @@ FloatLayout:
     Button:
         background_normal: "Leaderboard Button.png"
         size_hint: None, None
-        pos: 0, self.width
+        pos_hint: {"center_x" : .94, "bottom": .5}
         on_release:
             app.show_leaderboard()
         id: leaderboardbutton
