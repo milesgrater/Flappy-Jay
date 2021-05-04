@@ -13,6 +13,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import StringProperty
+from kivy.uix.boxlayout import BoxLayout
 
 from pipes import Pipe
 import database_code
@@ -82,25 +83,41 @@ class FlappyApp(App):
 
     def show_leaderboard(self):
         lb_grid = GridLayout(cols = 2)
+        lb_box = BoxLayout(orientation = 'vertical')
         lb_results = database_code.getUsernameScore_Sort()
-        res = [ [ i for i, j in lb_results ], [ j for i, j in lb_results ] ]
-        lb_username = res[0]
-        lb_score = res[1]
 
-        for x in range(10):
-            lb_grid.add_widget(Label(text = str(lb_username[x]), font_size = 13))
-            lb_grid.add_widget(Label(text = str(lb_score[x]), font_size = 13))
+        if (lb_results == []):
+            no_entries_label = Label(text = 'There are no current entries in the leaderboard!')
+            second_entries_label = Label(text = 'Play a game to enter your score!')
+            return_btn_box = Button(text = 'Return to Main Menu', size_hint = (.5, .4), pos_hint = {"center_x": .5, "center_y": .5})
 
-        return_btn = Button(text = 'Return to Main Menu', size_hint = (.3, .2), pos_hint = {"center_x" : .5})
-        lb_grid.add_widget(return_btn)
+            lb_box.add_widget(no_entries_label)
+            lb_box.add_widget(second_entries_label)
+            lb_box.add_widget(return_btn_box)
 
-        lb_popup = Popup(title = 'Leaderboard',
-                         content = lb_grid,
-                         size_hint = (None, None),
-                         size = (400, 400)
-                        )
-        return_btn.bind(on_press = lb_popup.dismiss)
-        lb_popup.open()
+            lb_box_popup = Popup(title = 'Leaderboard',
+                                content = lb_box,
+                                size_hint = (None, None),
+                                size = (400, 400)
+                               )
+            return_btn_box.bind(on_press = lb_box_popup.dismiss)
+            lb_box_popup.open()
+        else:
+            for result in lb_results:
+                temp = result
+                lb_grid.add_widget(Label(text = str(temp[0]), font_size = 13))
+                lb_grid.add_widget(Label(text = str(temp[1]), font_size = 13))
+
+            return_btn_float = Button(text = 'Return to Main Menu', size_hint = (.3, .2), pos_hint = {"center_x": .5, "center_y": .5})
+            lb_grid.add_widget(return_btn_float)
+
+            lb_popup = Popup(title = 'Leaderboard',
+                            content = lb_grid,
+                            size_hint = (None, None),
+                            size = (400, 400)
+                            )
+            return_btn_float.bind(on_press = lb_popup.dismiss)
+            lb_popup.open()
 
     def flap_wings(self, elapsed_time):
         jay = self.root.ids.jay
