@@ -26,15 +26,20 @@ class Background(Widget):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        '''
+        """
+
         Gets texture version of cloud image
-        '''
+
+        """       
+       
         self.cloud_texture = Image(source = 'cloud.png').texture
         self.floor_texture = Image(source = 'flappyJayFloor.png').texture
 
-        '''
+        """
+
         Allows clouds to repeat through out the sky
-        '''
+
+        """
         
         self.cloud_texture.wrap = 'repeat'
         self.floor_texture.wrap = 'repeat'
@@ -42,15 +47,19 @@ class Background(Widget):
         self.cloud_texture.uvsize = ( (Window.width / self.cloud_texture.width, -1))
 
     def scroll_effect(self, elapsed_time):
-        '''
-        Updates the position of the cloud, and the modulo so it can be wrapped
-        '''
+
+        """
+
+        Updates the position of the cloud, and the modulo so it can be 
+        
+        """
         self.cloud_texture.uvpos = ( (self.cloud_texture.uvpos[0] + elapsed_time) % Window.width, self.cloud_texture.uvpos[1])
         self.floor_texture.uvpos = ( (self.floor_texture.uvpos[0] + elapsed_time / 2.0) % Window.width, self.floor_texture.uvpos[1])
 
-        '''
+        """
         Draws the texture over and over
-        '''
+
+        """
         texture = self.property('cloud_texture')
         texture.dispatch(self)
 
@@ -58,13 +67,22 @@ class Background(Widget):
         texture.dispatch(self)
     
     def on_size(self, *args):
-        '''
+
+        """
         Determines how big the cloud size is before being repeated
-        '''
+
+        """
         self.cloud_texture.uvsize = (Window.width / self.cloud_texture.width, -1)
         self.floor_texture.uvsize = (Window.width / self.floor_texture.width, -1)
 
 class Jay(Image):
+
+    """
+    
+    Creates Jay in game and allows bird to go up and down on touch
+
+    """
+
     jay_velocity = NumericProperty(0)
 
     def on_touch_down(self, touch):
@@ -82,6 +100,13 @@ class FlappyApp(App):
     was_colliding = False
 
     def show_leaderboard(self):
+
+        """
+
+        Shows leaderboard 
+
+        """
+
         lb_grid = GridLayout(cols = 2)
         lb_box = BoxLayout(orientation = 'vertical')
         lb_results = database_code.getUsernameScore_Sort()
@@ -120,12 +145,26 @@ class FlappyApp(App):
             lb_popup.open()
 
     def flap_wings(self, elapsed_time):
+
+        """ 
+
+        Changes y value of the jay
+
+        """
+
         jay = self.root.ids.jay
         jay.y = jay.y + jay.jay_velocity * elapsed_time
         jay.jay_velocity = jay.jay_velocity - self.jay_gravity * elapsed_time
         self.collision()
 
     def collision(self):
+
+        """
+
+        Collision Function for Jay
+
+        """
+
         jay = self.root.ids.jay
         is_colliding = False
         for pipe in self.amount_pipes:
@@ -149,6 +188,13 @@ class FlappyApp(App):
 
 
     def game_over(self):
+
+        """
+
+        Game Over Function
+
+        """
+
         self.player_score = self.root.ids.player_score.text
         game_over_box = FloatLayout()
         self.game_over_im = Image(source = 'Game Over.png')
@@ -186,25 +232,55 @@ class FlappyApp(App):
         self.root.ids.jay.opacity = 0
     
     def press(self, instance):
+
+        """
+
+        Submits username and score to database
+
+        """
+
         username = self.username_input.text
-        database_code.addScore(username, self.player_score)
+        score = self.player_score
+        database_code.addScore(username, score)
 
         self.username_input.text = ''
 
 
 
     def next_frame(self, elapsed_time):
+
+            """ 
+            
+            Defines Frames in game
+
+            """
+
             self.flap_wings(elapsed_time)
             self.scroll_pipes(elapsed_time)
             self.root.ids.background.scroll_effect(elapsed_time)
     
     def on_start(self):
+
+        """
+
+        Intialization of the game
+
+        """
+
         self.root.ids.player_score.text = ""
         self.root.ids.title.opacity = 1
         self.root.ids.jay.opacity = 0
 
 
     def start_game(self):
+
+        """
+
+        Creates Pipes in game
+        Sets up game enviroment
+
+        """
+
         self.root.ids.player_score.text = "0"
         self.root.ids.leaderboardbutton.disabled = True
         self.root.ids.leaderboardbutton.opacity = 0
@@ -226,6 +302,13 @@ class FlappyApp(App):
             self.root.add_widget(pipe)
 
     def scroll_pipes(self, elapsed_time):
+
+        """
+
+        Makes pipes keep appearing and scrolling throughout game
+
+        """
+
         for pipes in self.amount_pipes:
             pipes.x -= elapsed_time * 100
         

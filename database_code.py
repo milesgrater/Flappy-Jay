@@ -69,16 +69,28 @@ def updateScore(username, user_score):
 def getUsernameScore_Sort():
     cursor.execute("SELECT * FROM leaderboard")
     leaderboard_results = cursor.fetchall()
-
     lb_length = len(leaderboard_results)
     for i in range(0, lb_length):
         for j in range(0, lb_length-i-1):
             if (leaderboard_results[j][1] < leaderboard_results[j + 1][1]): 
-                temp = leaderboard_results[j] 
-                leaderboard_results[j] = leaderboard_results[j + 1] 
-                leaderboard_results[j + 1] = temp 
+                    temp = leaderboard_results[j] 
+                    leaderboard_results[j] = leaderboard_results[j + 1] 
+                    leaderboard_results[j + 1] = temp 
 
-    return leaderboard_results 
+    return leaderboard_results
+
+def getUsernames():
+    cursor.execute("SELECT username FROM leaderboard")
+    username_list = cursor.fetchall()
+
+    return username_list
+
+def getScores():
+    cursor.execute("SELECT score FROM leaderboard")
+    score_list = cursor.fetchall()
+
+    return score_list
+
 
 def connectDB(username, passwd, h, db):
     """
@@ -104,7 +116,9 @@ connection = connectDB(usr, pwd, h, db)
 #creates cursor 
 cursor = connection.cursor()
 
-# #prompt user to enter player name after finishing game
+
+# clearLeaderboard()
+# prompt user to enter player name after finishing game
 # username = input("Enter player name: ")
 
 #*************************************************************************
